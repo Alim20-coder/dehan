@@ -2962,7 +2962,7 @@ function renderGallery() {
     col.setAttribute('data-aos', 'zoom-in');
     col.setAttribute('data-aos-delay', (50 * (idx % 8)).toString());
 
-    var imgSrc = 'CSS/' + item.file + '.jpeg';
+    var imgSrc = 'Css/' + item.file + '.jpeg';
     col.innerHTML = '<div class="gallery-item" onclick="openLightbox(\'' + imgSrc + '\',\'' + item.label + '\')">'
       + '<img src="' + imgSrc + '" alt="دهان أثاث الرياض" loading="lazy" onerror="this.parentElement.innerHTML=getFallback(' + item.file + ',\'' + item.cat + '\',\'' + item.label + '\')">'
       + '<div class="gallery-overlay">'
