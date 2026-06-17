@@ -2954,6 +2954,7 @@ var icons = {
 
 function renderGallery() {
   var grid = document.getElementById('galleryGrid');
+  if(!grid) return; 
   grid.innerHTML = '';
 
   galleryData.forEach(function(item, idx) {
@@ -2962,16 +2963,20 @@ function renderGallery() {
     col.setAttribute('data-aos', 'zoom-in');
     col.setAttribute('data-aos-delay', (50 * (idx % 8)).toString());
 
-    var imgSrc = 'Css/' + item.file + '.jpeg';
-    col.innerHTML = '<div class="gallery-item" onclick="openLightbox(\'' + imgSrc + '\',\'' + item.label + '\')">'
-      + '<img src="' + imgSrc + '" alt="دهان أثاث الرياض" loading="lazy" onerror="this.parentElement.innerHTML=getFallback(' + item.file + ',\'' + item.cat + '\',\'' + item.label + '\')">'
-      + '<div class="gallery-overlay">'
-      + '</div></div>';
+    var imgSrc = 'Css/' + item.file + '.jpeg'; 
+    var currentLabel = catLabels[item.cat] || ''; 
+
+    col.innerHTML = '<div class="gallery-item" onclick="openLightbox(\'' + imgSrc + '\',\'' + currentLabel + '\')">'
+      + '<img src="' + imgSrc + '" alt="دهان أثاث الرياض" loading="lazy" onerror="this.parentElement.innerHTML=getFallback(' + item.file + ',\'' + item.cat + '\',\'' + currentLabel + '\')">'
+      + '<div class="gallery-overlay"></div>'
+      + '</div>';
+      
     grid.appendChild(col);
   });
-  AOS.refresh();
+  if(typeof AOS !== 'undefined') {
+    AOS.refresh();
+  }
 }
-
 function getFallback(num, cat, label) {
   var g = gradients[num % gradients.length];
   var ic = icons[cat] || 'fa-paint-brush';
